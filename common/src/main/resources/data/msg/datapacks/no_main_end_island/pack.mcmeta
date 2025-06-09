@@ -1,0 +1,6 @@
+{
+  "pack": {
+    "description": "Built-in datapack.\nRemove the main End island along with the_end biome.",
+    "pack_format": 71
+  }
+}
