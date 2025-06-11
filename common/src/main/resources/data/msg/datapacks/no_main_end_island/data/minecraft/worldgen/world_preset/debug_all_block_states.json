@@ -11,8 +11,7 @@
       "generator": {
         "type": "minecraft:noise",
         "biome_source": {
-          "type": "minecraft:fixed",
-          "biome": "minecraft:the_end"
+          "type": "msg:no_main_end"
         },
         "settings": "msg:floating_islands"
       }
