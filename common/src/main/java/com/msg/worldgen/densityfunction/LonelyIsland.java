@@ -12,7 +12,7 @@ import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 //import net.minecraft.world.level.levelgen.DensityFunctions.EndIslandDensityFunction;
 //import net.minecraft.world.level.levelgen.DensityFunctions.BlendedNoise;
 
-public class LonelyIsland implements DensityFunction.SimpleFunction {
+public final class LonelyIsland implements DensityFunction.SimpleFunction {
    public static final KeyDispatchDataCodec<LonelyIsland> CODEC = KeyDispatchDataCodec.of(MapCodec.unit(new LonelyIsland(0L)));
    private final SimplexNoise islandNoise;
 
