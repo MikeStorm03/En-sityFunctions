@@ -2,6 +2,6 @@
   "pack": {
     "description": "Example built datapack.\nTurn the end into the Old End that only have 1 main island and the_end biome.",
     "pack_format": 71,
-    "supported_formats": [48, 80]
+    "supported_formats": [48, 81]
   }
 }

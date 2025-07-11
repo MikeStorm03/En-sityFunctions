@@ -9,7 +9,7 @@ public class CommonClass {
         Constants.LOG.info("Hello from Common init on {}! we are currently in a {} environment!", Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
 
         if (Services.PLATFORM.isModLoaded(Constants.ID)) {
-            Constants.LOG.info("Running mod OldEnd.");
+            Constants.LOG.info("Running mod {}.", Constants.NAME);
         }
     }
 

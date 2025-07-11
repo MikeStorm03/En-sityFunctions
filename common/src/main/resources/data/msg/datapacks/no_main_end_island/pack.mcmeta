@@ -2,6 +2,6 @@
   "pack": {
     "description": "Example built datapack.\nRemove the main End island along with the_end biome.",
     "pack_format": 71,
-    "supported_formats": [48, 80]
+    "supported_formats": [48, 81]
   }
 }
