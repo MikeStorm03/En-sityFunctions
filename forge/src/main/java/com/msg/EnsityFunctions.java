@@ -38,6 +38,6 @@ public class EnsityFunctions {
         DENSITY_REGISTER.register(eventBus);
         BIOME_SOURCE_REGISTER.register(eventBus);
 
-        CommonClass.init();
+        EnsityFunctionsCommon.init();
     }
 }

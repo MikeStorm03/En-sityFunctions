@@ -1,10 +1,10 @@
 package com.msg.platform;
 
-import com.msg.platform.services.IPlatformHelper;
+import com.msg.platform.services.EnsityFunctionsPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 
-public class ForgePlatformHelper implements IPlatformHelper {
+public class EnsityFunctionsForgePlatformHelper implements EnsityFunctionsPlatformHelper {
 
     @Override
     public String getPlatformName() {
