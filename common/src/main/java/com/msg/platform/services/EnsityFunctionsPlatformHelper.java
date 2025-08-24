@@ -1,6 +1,6 @@
 package com.msg.platform.services;
 
-public interface IPlatformHelper {
+public interface EnsityFunctionsPlatformHelper {
 
     /**
      * Gets the name of the current platform

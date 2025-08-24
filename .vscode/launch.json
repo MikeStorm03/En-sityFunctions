@@ -12,11 +12,11 @@
       "projectName": "neoforge",
       "mainClass": "net.neoforged.devlaunch.Main",
       "args": [
-        "@D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
+        "@D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\clientRunProgramArgs.txt"
       ],
       "vmArgs": [
-        "@D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
-        "-Dfml.modFolders\u003density_functions%%D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\bin\\main"
+        "@D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\clientRunVmArgs.txt",
+        "-Dfml.modFolders\u003density_functions%%D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\bin\\main"
       ],
       "cwd": "${workspaceFolder}\\neoforge\\run",
       "env": {},
@@ -34,11 +34,11 @@
       "projectName": "neoforge",
       "mainClass": "net.neoforged.devlaunch.Main",
       "args": [
-        "@D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\dataRunProgramArgs.txt"
+        "@D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\dataRunProgramArgs.txt"
       ],
       "vmArgs": [
-        "@D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\dataRunVmArgs.txt",
-        "-Dfml.modFolders\u003density_functions%%D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\bin\\main"
+        "@D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\dataRunVmArgs.txt",
+        "-Dfml.modFolders\u003density_functions%%D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\bin\\main"
       ],
       "cwd": "${workspaceFolder}\\neoforge\\run",
       "env": {},
@@ -56,11 +56,11 @@
       "projectName": "neoforge",
       "mainClass": "net.neoforged.devlaunch.Main",
       "args": [
-        "@D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\serverRunProgramArgs.txt"
+        "@D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\serverRunProgramArgs.txt"
       ],
       "vmArgs": [
-        "@D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\serverRunVmArgs.txt",
-        "-Dfml.modFolders\u003density_functions%%D:\\Minecraft\\Minecraft Stuffs\\mods\\En-sityFunctions\\neoforge\\bin\\main"
+        "@D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\build\\moddev\\serverRunVmArgs.txt",
+        "-Dfml.modFolders\u003density_functions%%D:\\Minecraft\\Stuffs\\mods\\En-sityFunctions\\neoforge\\bin\\main"
       ],
       "cwd": "${workspaceFolder}\\neoforge\\run",
       "env": {},

@@ -30,6 +30,6 @@ public class EnsityFunctions implements ModInitializer {
 
 		});
 */
-        CommonClass.init();
+        EnsityFunctionsCommon.init();
     }
 }
