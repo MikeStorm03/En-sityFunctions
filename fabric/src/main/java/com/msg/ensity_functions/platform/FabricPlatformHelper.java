@@ -1,9 +1,9 @@
-package com.msg.platform;
+package com.msg.ensity_functions.platform;
 
-import com.msg.platform.services.EnsityFunctionsPlatformHelper;
+import com.msg.ensity_functions.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 
-public class EnsityFunctionsFabricPlatformHelper implements EnsityFunctionsPlatformHelper {
+public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public String getPlatformName() {

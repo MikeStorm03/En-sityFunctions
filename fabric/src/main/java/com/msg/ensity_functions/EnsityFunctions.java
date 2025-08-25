@@ -1,8 +1,8 @@
-package com.msg;
+package com.msg.ensity_functions;
 
-import com.msg.worldgen.densityfunction.LonelyIsland;
-import com.msg.worldgen.biome_source.NoMainBiomeSource;
-import com.msg.worldgen.densityfunction.FloatingIslands;
+import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
+import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
+import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
@@ -30,6 +30,6 @@ public class EnsityFunctions implements ModInitializer {
 
 		});
 */
-        EnsityFunctionsCommon.init();
+        CommonClass.init();
     }
 }

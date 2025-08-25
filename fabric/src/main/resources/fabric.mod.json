@@ -15,7 +15,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.msg.EnsityFunctions"
+            "com.msg.ensity_functions.EnsityFunctions"
         ]
     },
     "mixins": [],

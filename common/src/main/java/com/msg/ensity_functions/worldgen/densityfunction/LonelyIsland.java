@@ -1,4 +1,4 @@
-package com.msg.worldgen.densityfunction;
+package com.msg.ensity_functions.worldgen.densityfunction;
 
 import com.mojang.serialization.MapCodec;
 

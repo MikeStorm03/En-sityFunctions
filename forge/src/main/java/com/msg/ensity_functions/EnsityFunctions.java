@@ -1,11 +1,12 @@
-package com.msg;
+package com.msg.ensity_functions;
 
 import java.util.function.Supplier;
 
 import com.mojang.serialization.MapCodec;
-import com.msg.worldgen.biome_source.NoMainBiomeSource;
-import com.msg.worldgen.densityfunction.FloatingIslands;
-import com.msg.worldgen.densityfunction.LonelyIsland;
+import com.msg.ensity_functions.Constants;
+import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
+import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
+import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.biome.BiomeSource;

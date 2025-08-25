@@ -1,4 +1,4 @@
-package com.msg.worldgen.biome_source;
+package com.msg.ensity_functions.worldgen.biome_source;
 
 import java.util.stream.Stream;
 

@@ -1,4 +1,4 @@
-package com.msg;
+package com.msg.ensity_functions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
