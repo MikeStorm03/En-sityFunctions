@@ -3,7 +3,6 @@ package com.msg.ensity_functions;
 import java.util.function.Supplier;
 
 import com.mojang.serialization.MapCodec;
-import com.msg.ensity_functions.Constants;
 import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
 import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
 import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
