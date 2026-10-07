@@ -15,7 +15,7 @@ import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.Pack.Position;
@@ -33,26 +33,26 @@ public class EnsityFunctions {
         CommonClass.init();
     }
 
-    @SubscribeEvent 
+    @SubscribeEvent
     public static void registerSetup(RegisterEvent event) {
         Registry<?> registry = event.getRegistry();
-        if (registry.equals(BuiltInRegistries.BIOME_SOURCE)) Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.resourcesLocation("no_main_end"), NoMainBiomeSource.CODEC);
+        if (registry.equals(BuiltInRegistries.BIOME_SOURCE)) Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.identifier("no_main_end"), NoMainBiomeSource.CODEC);
         else if (registry.equals(BuiltInRegistries.DENSITY_FUNCTION_TYPE)) {
-            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "lonely_island"), LonelyIsland.CODEC.codec());
-            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "floating_islands"), FloatingIslands.CODEC.codec());
+            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "lonely_island"), LonelyIsland.CODEC.codec());
+            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "floating_islands"), FloatingIslands.CODEC.codec());
         }
     }
 
     @SubscribeEvent 
     public static void builtInDataPack(final AddPackFindersEvent event) {
-        event.addPackFinders(ResourceLocation.fromNamespaceAndPath(Constants.ID, "data/msg/datapacks/lonely_end_island"),
+        event.addPackFinders(Identifier.fromNamespaceAndPath(Constants.ID, "data/msg/datapacks/lonely_end_island"),
                             PackType.SERVER_DATA,
                             Component.translatable("datapack.lonely_end_island"),
                             PackSource.FEATURE,
                             false,
                             Position.TOP
                         );
-        event.addPackFinders(ResourceLocation.fromNamespaceAndPath(Constants.ID, "data/msg/datapacks/no_main_island"),
+        event.addPackFinders(Identifier.fromNamespaceAndPath(Constants.ID, "data/msg/datapacks/no_main_island"),
                             PackType.SERVER_DATA,
                             Component.translatable("datapack.no_main_island"),
                             PackSource.FEATURE,

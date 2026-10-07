@@ -43,14 +43,14 @@ public class EnsityFunctions {
         CommonClass.init();
     }
 
-    @SubscribeEvent 
+    @SubscribeEvent
     public static void registerSetup(final RegisterEvent event) {
         Registry<?> registry = event.getVanillaRegistry();
         if (registry == null) return;
-        if (registry.equals(BuiltInRegistries.BIOME_SOURCE)) Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.resourcesLocation("no_main_end"), NoMainBiomeSource.CODEC);
+        if (registry.equals(BuiltInRegistries.BIOME_SOURCE)) Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.identifier("no_main_end"), NoMainBiomeSource.CODEC);
         else if (registry.equals(BuiltInRegistries.DENSITY_FUNCTION_TYPE)) {
-            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "lonely_island"), LonelyIsland.CODEC.codec());
-            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "floating_islands"), FloatingIslands.CODEC.codec());
+            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "lonely_island"), LonelyIsland.CODEC.codec());
+            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "floating_islands"), FloatingIslands.CODEC.codec());
         }
     }
 

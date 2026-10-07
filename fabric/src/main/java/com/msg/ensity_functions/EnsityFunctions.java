@@ -13,8 +13,8 @@ import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
 import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
-import net.fabricmc.fabric.impl.resource.loader.ResourceManagerHelperImpl;
+import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
+import net.fabricmc.fabric.impl.resource.ResourceLoaderImpl;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,23 +26,23 @@ public class EnsityFunctions implements ModInitializer {
     public void onInitialize() {
 
         //Constants.LOG.info("Hello Fabric world!");
-        Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.resourcesLocation("no_main_end"), NoMainBiomeSource.CODEC);
-        Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "lonely_island"), LonelyIsland.CODEC.codec());
-        Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "floating_islands"), FloatingIslands.CODEC.codec());
+        Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.identifier("no_main_end"), NoMainBiomeSource.CODEC);
+        Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "lonely_island"), LonelyIsland.CODEC.codec());
+        Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "floating_islands"), FloatingIslands.CODEC.codec());
 
         FabricLoader.getInstance().getModContainer(Constants.ID).ifPresent(container -> {
         
-            ResourceManagerHelperImpl.registerBuiltinResourcePack(Constants.resourcesLocation("lonely_end_island"),
+            ResourceLoaderImpl.registerBuiltinPack(Constants.identifier("lonely_end_island"),
                                                                                 "data/msg/datapacks/lonely_end_island",
                                                                                 container,
                                                                                 Component.translatable("datapack.lonely_end_island"),
-                                                                                ResourcePackActivationType.NORMAL);
+                                                                                PackActivationType.NORMAL);
 
-            ResourceManagerHelperImpl.registerBuiltinResourcePack(Constants.resourcesLocation("no_main_island"),
+            ResourceLoaderImpl.registerBuiltinPack(Constants.identifier("no_main_island"),
                                                                                     "data/msg/datapacks/no_main_island",
                                                                                     container,
                                                                                     Component.translatable("datapack.no_main_island"),
-                                                                                    ResourcePackActivationType.NORMAL);
+                                                                                    PackActivationType.NORMAL);
 
 		});
 

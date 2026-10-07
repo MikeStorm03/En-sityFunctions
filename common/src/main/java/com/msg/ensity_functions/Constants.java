@@ -11,7 +11,7 @@ package com.msg.ensity_functions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public interface  Constants {
 
@@ -20,7 +20,7 @@ public interface  Constants {
 	String NAME = "En-sityFunctions";
 	Logger LOG = LoggerFactory.getLogger(NAME);
 
-	static ResourceLocation resourcesLocation(String name){
-		return ResourceLocation.fromNamespaceAndPath(Constants.NAMESPACE, name);
+	static Identifier identifier(String name){
+		return Identifier.fromNamespaceAndPath(Constants.NAMESPACE, name);
 	}
 }
