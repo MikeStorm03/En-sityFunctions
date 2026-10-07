@@ -8,10 +8,6 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/.
 */
 package com.msg.ensity_functions;
 
-import java.io.IOException;
-import java.util.function.Supplier;
-
-import com.mojang.serialization.MapCodec;
 import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
 import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
 import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
@@ -21,20 +17,16 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.PathPackResources;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.Pack.Position;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(Constants.ID)
-@EventBusSubscriber(modid = Constants.ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Constants.ID)
 public class EnsityFunctions {
 
     public EnsityFunctions() {

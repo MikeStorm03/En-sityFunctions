@@ -28,7 +28,7 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.Pack.Position;
 import net.minecraft.server.packs.repository.Pack.ResourcesSupplier;
 import net.minecraftforge.event.AddPackFindersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -36,7 +36,7 @@ import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.registries.RegisterEvent;
 
 @Mod(Constants.ID)
-@EventBusSubscriber(modid = Constants.ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Constants.ID)
 public class EnsityFunctions {
 
     public EnsityFunctions() {
@@ -54,7 +54,7 @@ public class EnsityFunctions {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent 
     public static void builtInDataPack(final AddPackFindersEvent event) {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) return;
         IModFile modFileInfo = ModList.get().getModFileById(Constants.ID).getFile();
