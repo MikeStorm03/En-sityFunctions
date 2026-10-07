@@ -22,3 +22,7 @@ build
 eclipse
 run
 runs
+
+shortcut/
+*.ini
+*.ico

@@ -1,43 +1,95 @@
+/*
+En-sityFunctions
+Copyright (C) 2025 - MikeStorm03
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
+*/
 package com.msg.ensity_functions;
 
-import java.util.function.Supplier;
+import java.nio.file.Path;
+import java.util.Optional;
 
-import com.mojang.serialization.MapCodec;
 import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
 import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
 import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackLocationInfo;
+import net.minecraft.server.packs.PackResources;
+import net.minecraft.server.packs.PackSelectionConfig;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.PathPackResources;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.server.packs.repository.Pack.Position;
+import net.minecraft.server.packs.repository.Pack.ResourcesSupplier;
+import net.minecraftforge.event.AddPackFindersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.forgespi.locating.IModFile;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod(Constants.ID)
+@EventBusSubscriber(modid = Constants.ID, bus = EventBusSubscriber.Bus.MOD)
 public class EnsityFunctions {
 
-    // Density Function Register
-    public static final DeferredRegister<MapCodec<? extends DensityFunction>> DENSITY_REGISTER = DeferredRegister.create(Registries.DENSITY_FUNCTION_TYPE, Constants.NAMESPACE);
-    public static final Supplier<MapCodec<LonelyIsland>> LONELY_ISLAND = DENSITY_REGISTER.register("lonely_island", () -> MapCodec.unit(new LonelyIsland(0L)));
-    public static final Supplier<MapCodec<FloatingIslands>> FLOATING_ISLANDS = DENSITY_REGISTER.register("floating_islands", () -> MapCodec.unit(new FloatingIslands(0L)));
-    
-    // Biome Source Register
-    public static final DeferredRegister<MapCodec<? extends BiomeSource>> BIOME_SOURCE_REGISTER = DeferredRegister.create(Registries.BIOME_SOURCE, Constants.NAMESPACE);
-    public static final Supplier<MapCodec<NoMainBiomeSource>> NO_MAIN_END = BIOME_SOURCE_REGISTER.register("no_main_end", () -> NoMainBiomeSource.CODEC);
-
     public EnsityFunctions() {
-
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(() -> {}));
-        MinecraftForge.EVENT_BUS.register(this);
-
-        DENSITY_REGISTER.register(eventBus);
-        BIOME_SOURCE_REGISTER.register(eventBus);
-
         CommonClass.init();
+    }
+
+    @SubscribeEvent 
+    public static void registerSetup(final RegisterEvent event) {
+        Registry<?> registry = event.getVanillaRegistry();
+        if (registry == null) return;
+        if (registry.equals(BuiltInRegistries.BIOME_SOURCE)) Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.resourcesLocation("no_main_end"), NoMainBiomeSource.CODEC);
+        else if (registry.equals(BuiltInRegistries.DENSITY_FUNCTION_TYPE)) {
+            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "lonely_island"), LonelyIsland.CODEC.codec());
+            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.resourcesLocation( "floating_islands"), FloatingIslands.CODEC.codec());
+        }
+    }
+
+    @SubscribeEvent
+    public static void builtInDataPack(final AddPackFindersEvent event) {
+        if (event.getPackType() == PackType.CLIENT_RESOURCES) return;
+        IModFile modFileInfo = ModList.get().getModFileById(Constants.ID).getFile();
+        event.addRepositorySource(consumer -> {
+            consumer.accept(getPack(event, modFileInfo, "lonely_end_island"));
+            consumer.accept(getPack(event, modFileInfo, "no_main_island"));
+        });
+    }
+
+    private static Pack getPack(AddPackFindersEvent event, IModFile modFile, String packNamespace) {
+
+        Path path = modFile.findResource("data/msg/datapacks/" + packNamespace);
+
+        return Pack.readMetaAndCreate(
+
+            new PackLocationInfo("msg:" + packNamespace,
+                                Component.translatable("datapack." + packNamespace),
+                                PackSource.FEATURE,
+                                Optional.empty()
+            ),
+
+            new ResourcesSupplier() {
+                @Override
+                public PackResources openPrimary(PackLocationInfo loc) {
+                    return new PathPackResources(loc, path);
+                }
+
+                @Override
+                public PackResources openFull(PackLocationInfo loc, Pack.Metadata metadata) {
+                    return new PathPackResources(loc, path);
+                }
+            },
+
+            PackType.SERVER_DATA,
+            new PackSelectionConfig(false, Position.TOP, false));
+
     }
 }
