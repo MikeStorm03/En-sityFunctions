@@ -54,17 +54,17 @@ public class EnsityFunctions {
         }
     }
 
-    @SubscribeEvent 
+    @SubscribeEvent
     public static void builtInDataPack(final AddPackFindersEvent event) {
         if (event.getPackType() == PackType.CLIENT_RESOURCES) return;
-        IModFile modFileInfo = ModList.get().getModFileById(Constants.ID).getFile();
+        IModFile modFileInfo = ModList.getModFileById(Constants.ID).getFile();
         event.addRepositorySource(consumer -> {
-            consumer.accept(getPack(event, modFileInfo, "lonely_end_island"));
-            consumer.accept(getPack(event, modFileInfo, "no_main_island"));
+            consumer.accept(getPack(modFileInfo, "lonely_end_island"));
+            consumer.accept(getPack(modFileInfo, "no_main_island"));
         });
     }
 
-    private static Pack getPack(AddPackFindersEvent event, IModFile modFile, String packNamespace) {
+    private static Pack getPack(IModFile modFile, String packNamespace) {
 
         Path path = modFile.findResource("data/msg/datapacks/" + packNamespace);
 

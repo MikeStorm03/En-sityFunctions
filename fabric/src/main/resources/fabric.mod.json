@@ -18,7 +18,6 @@
             "com.msg.ensity_functions.EnsityFunctions"
         ]
     },
-    "mixins": [],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
