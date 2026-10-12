@@ -25,3 +25,4 @@ rootProject.name = 'En-sityFunctions'
 include('common')
 include('fabric')
 include('forge')
+include('neoforge')

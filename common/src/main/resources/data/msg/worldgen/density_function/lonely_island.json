@@ -1,7 +1,5 @@
 {
-  "type": "minecraft:add",
-    "argument1": {
-      "type": "msg:lonely_island"
-    },
-    "argument2": "minecraft:end/base_3d_noise"
+    "type": "minecraft:add",
+    "left": "msg:main_island",
+    "right": "minecraft:end/base_3d_noise"
 }

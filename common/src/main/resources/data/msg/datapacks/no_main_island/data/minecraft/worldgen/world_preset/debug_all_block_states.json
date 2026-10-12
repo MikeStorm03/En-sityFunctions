@@ -1,31 +1,81 @@
 {
-  "dimensions": {
-    "minecraft:overworld": {
-      "type": "minecraft:overworld",
-      "generator": {
-        "type": "minecraft:debug"
-      }
-    },
-    "minecraft:the_end": {
-      "type": "minecraft:the_end",
-      "generator": {
-        "type": "minecraft:noise",
-        "biome_source": {
-          "type": "msg:no_main_end"
+    "dimensions": {
+        "minecraft:overworld": {
+            "type": "minecraft:overworld",
+            "generator": {
+                "type": "minecraft:debug"
+            }
         },
-        "settings": "msg:floating_islands"
-      }
-    },
-    "minecraft:the_nether": {
-      "type": "minecraft:the_nether",
-      "generator": {
-        "type": "minecraft:noise",
-        "biome_source": {
-          "type": "minecraft:multi_noise",
-          "preset": "minecraft:nether"
+        "minecraft:the_end": {
+            "type": "minecraft:the_end",
+            "generator": {
+                "type": "minecraft:noise",
+                "biome_source": {
+                    "type": "minecraft:multi_noise",
+                    "biomes": [
+                        {
+                            "biome": "minecraft:end_highlands",
+                            "parameters": {
+                                "temperature": 0,
+                                "humidity": 0,
+                                "continentalness": 0,
+                                "erosion": 0.25,
+                                "weirdness": 0,
+                                "depth": 0,
+                                "offset": 0
+                            }
+                        },
+                        {
+                            "biome": "minecraft:end_midlands",
+                            "parameters": {
+                                "temperature": 0,
+                                "humidity": 0,
+                                "continentalness": 0,
+                                "erosion": -0.0625,
+                                "weirdness": 0,
+                                "depth": 0,
+                                "offset": 0
+                            }
+                        },
+                        {
+                            "biome": "minecraft:small_end_islands",
+                            "parameters": {
+                                "temperature": 0,
+                                "humidity": 0,
+                                "continentalness": 0,
+                                "erosion": -0.21875,
+                                "weirdness": 0,
+                                "depth": 0,
+                                "offset": 0
+                            }
+                        },
+                        {
+                            "biome": "minecraft:end_barrens",
+                            "parameters": {
+                                "temperature": 0,
+                                "humidity": 0,
+                                "continentalness": 0,
+                                "erosion": -2,
+                                "weirdness": 0,
+                                "depth": 0,
+                                "offset": 0
+                          }
+                        }
+                    ]
+                },
+                "settings": "msg:floating_islands"
+            }
         },
-        "settings": "minecraft:nether"
-      }
+        "minecraft:the_nether": {
+            "type": "minecraft:the_nether",
+            "generator": {
+                "type": "minecraft:noise",
+                "biome_source": {
+                    "type": "minecraft:multi_noise",
+                    "preset": "minecraft:nether"
+                },
+                "settings": "minecraft:nether"
+            }
+        }
     }
-  }
 }

@@ -19,46 +19,65 @@ import net.minecraft.core.QuartPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeResolver;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.levelgen.DensityFunction;
+// import net.minecraft.world.level.biome.TheEndBiomeSource;
 
+@Deprecated(forRemoval = true)
 public class NoMainBiomeSource extends BiomeSource {
-
-    public static final MapCodec<NoMainBiomeSource> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(RegistryOps.retrieveElement(Biomes.END_HIGHLANDS), RegistryOps.retrieveElement(Biomes.END_MIDLANDS), RegistryOps.retrieveElement(Biomes.SMALL_END_ISLANDS), RegistryOps.retrieveElement(Biomes.END_BARRENS)).apply(instance, instance.stable(NoMainBiomeSource::new)));
+    public static final MapCodec<NoMainBiomeSource> CODEC = RecordCodecBuilder.mapCodec((i) -> i.group(
+                                                                                                    RegistryOps.retrieveElement(Biomes.END_HIGHLANDS),
+                                                                                                    RegistryOps.retrieveElement(Biomes.END_MIDLANDS),
+                                                                                                    RegistryOps.retrieveElement(Biomes.SMALL_END_ISLANDS),
+                                                                                                    RegistryOps.retrieveElement(Biomes.END_BARRENS))
+                                                                                                .apply(i, i.stable(NoMainBiomeSource::new)));
     private final Holder<Biome> highlands;
     private final Holder<Biome> midlands;
-    private final Holder<Biome> smallIslands;
+    private final Holder<Biome> islands;
     private final Holder<Biome> barrens;
 
-    public static NoMainBiomeSource create(HolderGetter<Biome> biomeGetter) {
-      return new NoMainBiomeSource(biomeGetter.getOrThrow(Biomes.END_HIGHLANDS), biomeGetter.getOrThrow(Biomes.END_MIDLANDS), biomeGetter.getOrThrow(Biomes.SMALL_END_ISLANDS), biomeGetter.getOrThrow(Biomes.END_BARRENS));
+    public static NoMainBiomeSource create(final HolderGetter<Biome> biomes) {
+        return new NoMainBiomeSource(biomes.getOrThrow(Biomes.END_HIGHLANDS),
+                                    biomes.getOrThrow(Biomes.END_MIDLANDS),
+                                    biomes.getOrThrow(Biomes.SMALL_END_ISLANDS),
+                                    biomes.getOrThrow(Biomes.END_BARRENS)
+                                );
     }
 
-    private NoMainBiomeSource(Holder<Biome> highlands, Holder<Biome> midlands, Holder<Biome> smallIslands, Holder<Biome> barrens) {
+    private NoMainBiomeSource(final Holder<Biome> highlands, final Holder<Biome> midlands, final Holder<Biome> islands, final Holder<Biome> barrens) {
         this.highlands = highlands;
         this.midlands = midlands;
-        this.smallIslands = smallIslands;
+        this.islands = islands;
         this.barrens = barrens;
     }
 
     protected Stream<Holder<Biome>> collectPossibleBiomes() {
-        return Stream.of(this.highlands, this.midlands, this.smallIslands, this.barrens);
+        return Stream.of(this.highlands, this.midlands, this.islands, this.barrens);
     }
 
-    protected MapCodec<? extends BiomeSource> codec() {
+    protected MapCodec<NoMainBiomeSource> codec() {
         return CODEC;
     }
 
-    public Holder<Biome> getNoiseBiome(int x, int y, int z, Climate.Sampler noise) {
-        double d = noise.erosion().compute(new DensityFunction.SinglePointContext((SectionPos.blockToSectionCoord(QuartPos.toBlock(x)) * 2 + 1) * 8, QuartPos.toBlock(y), (SectionPos.blockToSectionCoord(QuartPos.toBlock(z)) * 2 + 1) * 8));
-        if (d > 0.25) {
+    public BiomeResolver createResolver(final Climate.Sampler sampler) {
+        return (quartX, quartY, quartZ) -> this.getNoiseBiome(quartX, quartY, quartZ, sampler);
+    }
+
+    private Holder<Biome> getNoiseBiome(final int quartX, final int quartY, final int quartZ, final Climate.Sampler sampler) {
+
+        double heightValue = sampler.erosion().sampleValue(
+                                                        (SectionPos.blockToSectionCoord(QuartPos.toBlock(quartX)) * 2 + 1) * 8,
+                                                        QuartPos.toBlock(quartY),
+                                                        (SectionPos.blockToSectionCoord(QuartPos.toBlock(quartZ)) * 2 + 1) * 8
+                                                    );
+        if (heightValue > 0.25d) {
             return this.highlands;
-        } else if (d >= -0.0625) {
+        } else if (heightValue >= -0.0625d) {
             return this.midlands;
         } else {
-            return d < -0.21875 ? this.smallIslands : this.barrens;
+            return heightValue < -0.21875d ? this.islands : this.barrens;
         }
     }
 }

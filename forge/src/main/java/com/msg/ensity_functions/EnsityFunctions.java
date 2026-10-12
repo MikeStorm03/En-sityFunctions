@@ -10,15 +10,16 @@ package com.msg.ensity_functions;
 
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import com.msg.ensity_functions.worldgen.biome_source.NoMainBiomeSource;
 import com.msg.ensity_functions.worldgen.densityfunction.FloatingIslands;
-import com.msg.ensity_functions.worldgen.densityfunction.LonelyIsland;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackLocationInfo;
+import net.minecraft.server.packs.PackMetadataResources;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
@@ -48,10 +49,7 @@ public class EnsityFunctions {
         Registry<?> registry = event.getVanillaRegistry();
         if (registry == null) return;
         if (registry.equals(BuiltInRegistries.BIOME_SOURCE)) Registry.register(BuiltInRegistries.BIOME_SOURCE, Constants.identifier("no_main_end"), NoMainBiomeSource.CODEC);
-        else if (registry.equals(BuiltInRegistries.DENSITY_FUNCTION_TYPE)) {
-            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "lonely_island"), LonelyIsland.CODEC.codec());
-            Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "floating_islands"), FloatingIslands.CODEC.codec());
-        }
+        else if (registry.equals(BuiltInRegistries.DENSITY_FUNCTION_TYPE)) Registry.register(BuiltInRegistries.DENSITY_FUNCTION_TYPE, Constants.identifier( "floating_islands"), FloatingIslands.CODEC);
     }
 
     @SubscribeEvent
@@ -78,13 +76,13 @@ public class EnsityFunctions {
 
             new ResourcesSupplier() {
                 @Override
-                public PackResources openPrimary(PackLocationInfo loc) {
+                public PackMetadataResources openMetadata(PackLocationInfo loc) {
                     return new PathPackResources(loc, path);
                 }
 
                 @Override
-                public PackResources openFull(PackLocationInfo loc, Pack.Metadata metadata) {
-                    return new PathPackResources(loc, path);
+                public Stream<PackResources> openResources(PackLocationInfo loc, Pack.Metadata metadata) {
+                    return Stream.of(new PathPackResources(loc, path));
                 }
             },
 
